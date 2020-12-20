@@ -1,0 +1,259 @@
+\chapter{BULGULAR VE TARTIŞMA}
+\label{bulgularvetartisma}
+Literatür kısmında da bahsedildiği üzere hibrit motor sistemi kontrol algoritmasını modellemek amacıyla Simulink ortamında bir model oluşturulmuştur. Bu modele, kontrolcüyü
+test etmek amacıyla farklı sürüş çevrimleri entegre edilmiştir. Böylece kontrolcü performansını ve sağlamlığını görebilmek adına birden fazla kıyas ortaya çıkmıştır. Oluşturulan model
+ve bu modelin her bir alt sistemi kendi alt başlıklarında incelenmiştir. 
+
+\section{Simulink Hibrit Motor Sistemli Taşıt Modeli}
+\label{simhibmotsistasmod}
+Kontrolcü modelinin verimli ve düzgün çalışması için kontrol edilecek değişkenlerin de aynı hassasiyet ve 
+doğrulukla modellenmesi gerekmektedir. Bu sebeple kontrolcüye ek olarak, hibrit motor sisteminin içerisinde yer aldığı taşıt, bu taşıta etkiyen kuvvetler ve buna bağlı
+gerekli ivme ve çekiş miktarları da modellenmiştir. Simulink'te oluşturulan model:
+\begin{itemize}
+    \item İvme İsteği,
+    \item Çekiş Kuvveti Hesabı,
+    \item Dişli Kutusu Çevrim Oranları,
+    \item Üretilen Güç,
+    \item Güç ve Sürüş Modu Tahkimi,
+    \item Batarya Güç Tüketim Hesabı,
+    \item Şarj Durumu,
+\end{itemize} olmak üzere 7 alt sistemden oluşmaktadır. Bu alt sistemlerin de içerisinde yer aldığı genel modelinin görüntüsü  Şekil \ref{fig:SimulinkButunModel}'de verilmiştir.
+
+\begin{landscape}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\paperwidth]{gorseller/SimulinkButunModel}
+    \caption{Simulink Sistem Modeli}\label{fig:SimulinkButunModel}
+\end{figure}
+
+\end{landscape}
+
+\subsection{İvme İsteği}
+Hibrit motor sisteminin kontrol edilebilmesi için öncelikle anlık olarak taşıtın ivme isteği bilinmelidir. Burada ivme isteğinden kastedilen taşıtın hızındaki değişimdir. Bu sayede taşıtın 
+hızlanması için motor veya motorların sağlaması gerekli kuvvet bilinebilecektir. İvme isteğinin negatif çıkması yani yavaşlama durumunda ise, batarya seviyesine bağlı olarak rejeneratif fren yapılabilmektedir. 
+Sürüş çevriminden saniye başına belirli olan ivme isteği bu sistemin girdisi; çıktısı ise hızlanma, yavaşlama ve sabit hızı anlatan ivme durumudur. 
+Bu sistem ve elemanları Şekil \ref{fig:ivmeistegi} 'de verilmiştir.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{gorseller/ivmeistegi}
+    \caption{İvme İsteği Alt Sistemi}\label{fig:ivmeistegi}
+\end{figure}
+
+
+\subsection{Çekiş Kuvveti Hesabı}
+
+Aracı noktasal ve bütün bir kütle olarak kabul edersek Newton'ın 2. hareket yasası ile çekiş kuvvet hesabını yapabiliriz.
+Araca etkiyen başlıca kuvvetler ise çekiş ve kayıp kuvvetleridir. Çekiş kuvvetleri aracın o anki ivmesi ve kütlesi yardımıyla araca etkiyen net kuvvet ile aracın o anki 
+kayıp (sürtünme vb.) kuvvetleri arasındaki fark sayesinde bulunur. Çekiş kuvvetleri aynı zamanda aktarma organları aracılığı ile hibrit motor sisteminin araca aktarması 
+gereken kuvvettir (\cite{vehdynctrl}).
+
+\begin{equation}
+    \label{eqn:fnethesabi}
+    F_{net}=F_{cekis}-F_{kayiplar}
+\end{equation}
+
+Burada \acrshort{fnet}, araca etkiyen net kuvveti, \acrshort{fcekis} araca etkiyen çekiş kuvvetlerinin
+toplamını ve \acrshort{fkayiplar} araca etkiyen kayıp kuvvetlerinin toplamı ifade eder. Denklem \ref{eqn:fnethesabi} $F_{cekis}$ için düzenlenirse
+
+\begin{equation}
+    \label{eqn:fcekishesabi}
+    F_{cekis}=F_{net}-F_{kayiplar} 
+\end{equation}
+
+Denklem \ref{eqn:fcekishesabi} elde edilir. \acrshort{marac} araç kütlesini, \acrshort{aarac} ise araç ivmesini belirtir.Newton'un ikinci hareket yasası araç için uygulanırsa:
+
+\begin{equation}
+    F_{net} = m_{arac} a_{net}
+    \label{eqn:newton}
+\end{equation}
+Denklem \ref{eqn:newton} elde edilir. \ref{eqn:fcekishesabi} ve \ref{eqn:newton} denklemleri birleştirilirse çekiş için gerekli kuvveti arabanın o anki ivme isteğine bağlı ifade eden çekiş denklemi
+(Denklem \ref{eqn:cekis}) bulunur.
+
+\begin{equation}
+    F_{cekis}=(m_{arac} a_{net})-F_{kayiplar}
+    \label{eqn:cekis}
+\end{equation}
+
+Araca etkiyen kayıp kuvvetleri ise, aerodinamik kuvvet, araç-yol arasındaki sürtünmeden kaynaklı yuvarlanma kuvveti ve araca etkiyen yer çekiminden kaynaklanan kuvvettir. 
+Bu kuvvetler sırasıyla \ref{eqn:faero}, \ref{eqn:fyuvarlanma} ve \ref{eqn:fagirlikdikey} denklemlerinde; bu kuvvetlerin toplamı ise denklem \ref{eqn:fkayiptoplam}'te verilmiştir.
+
+\begin{equation}
+    F_{aero}=\frac{1}{2}\rho C_dA_f(\dot{x}+V_{ruz})^2)
+    \label{eqn:faero}
+\end{equation}
+
+\begin{equation}
+    F_{yuvarlanma}=R_{xf}+R_{xr}=f(F_{zf}+F_{zr})=f(mgcos(\alpha))
+    \label{eqn:fyuvarlanma}
+\end{equation}
+
+\begin{equation}
+    F_{yercekimi}=m_{arac}gsin(\alpha)
+    \label{eqn:fagirlikdikey}
+\end{equation}
+
+
+\begin{equation}
+    F_{kayiplar}=F_{aero}+F_{yuvarlanma}+F_{yercekimi}
+    \label{eqn:fkayiptoplam}
+\end{equation}
+
+Buradaki terimler araca etkiyen aerodinamik kuvvet (\acrshort{faero}), araca etkiyen yuvarlanma kuvveti (\acrshort{fyuvarlanma}), araca etkiyen yerçekimi kuvveti (\acrshort{fyercekimi}) olarak sıralanabilir. Kayıp denklemlerinin açık halleri tek tek \ref{eqn:fkayiptoplam} denklemine yazılırsa
+\ref{eqn:kayip} denklemi bulunur.
+\begin{equation}
+    F_{kayiplar}=\frac{1}{2}\rho C_dA_f(\dot{x}+V_{ruz})^2)+m_{arac}gsin(\alpha)+f(m_{arac}gcos(\alpha))
+    \label{eqn:kayip}
+\end{equation}
+
+Burada \acrshort{af} rüzgarın etkidiği ön yüzey alanı, $\rho$ hava yoğunluğunu, \acrshort{cd} sürtünme katsayısını, \acrshort{g} yerçekimi ivmesini, $\alpha$ ise yolun yatay eksenle yaptığı açıyı ifade eder. \ref{eqn:kayip} denklemi \ref{eqn:cekis} denkleminde yerine yazıldığında, herhangi bir aracın herhangi bir ivmedeki çekiş gücünü
+hesaplayabilmek için gerekli denklem elde edilir. 
+\begin{equation}
+    F_{cekis}=(m_{arac}a_{net})-(\frac{1}{2}\rho C_dA_f(\dot{x}+V_{ruz})^2)+m_{arac}gsin(\alpha)+f(m_{arac}gcos(\alpha)))
+    \label{eqn:cekisfinal}
+\end{equation}
+
+Bu hesapları yapabilmek için Simulink'te oluşturulan alt sistemin girdileri araç hızı, araç ivmesi ve araç ivme durumu; çıktısı ise
+araç çekişi için gerekli kuvvettir. 
+Denklem \ref{eqn:cekisfinal} yardımı ile oluşturulan alt sistemin görüntüsü Şekil \ref{fig:cekkuvhes}'de verilmiştir.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{gorseller/cekiskuvvetihesabi}
+    \caption{Araç Çekiş Kuvveti Hesabı Alt Sistemi}\label{fig:cekkuvhes}
+\end{figure}
+
+\subsection{Dişli Kutusu Çevrim Oranları }
+\label{dislikutusucevrimoranlari}
+Motorların hareketin sağlandığı tekerlek vb. parçalara doğrudan bağlanmadığı sistemlerde,
+motorlar ve tekerlekler arasında birtakım aktarım organları bulunur. Burada açısal hızları ve kuvvet uygulama eksenlerini tasarım doğrultusunda değiştirebilmektir.
+Bu çalışmada ise motorlarla tekerlekler arasındaki aktarımı sağlayan güç ayrım cihazı üzerinde durulmuştur.
+\ref{PlanetDisliLiteratur}'de de bahsedildiği üzere, güç ayrım cihazı da bir tür planet dişli setidir. Yani bu taşıtın dişli kutusu mekanizma denklemleri,
+planet dişli mekanizma denklemleri kullanılarak oluşuturulabilir. Aslında karmaşık bir sistem olsa da bu denklemler aracılığıyla kinematik olarak önceden paylaşılan hız denklemleri ile 
+araç hızı ve tekerlek hızı arasındaki bağlantı kurulabilir.
+
+Dişli kutusu hesaplarına geçmeden önce araç hızından tekerlek hızına geçilmelidir. Çünkü dişli kutusu çıktısını tekerleğe aktarmaktadır. Motor hızları, dakikadaki devir sayısı ile açıklandığı için, 
+aracın çizgisel hızından tekerlek yarıçapı sayesinde açısal hıza, ve daha sonra ilgili dönüşüm yapılarak tekerleğin dakikadaki devir sayısına geçilebilir. Bu denklem \ref{eqn:wheelspeedcalc}'te verilmiştir.
+
+\begin{equation}
+    n_{w}=\frac{V_{arac}}{r_{w}}\frac{60}{2\pi}
+    \label{eqn:wheelspeedcalc}
+\end{equation}
+
+Denklem \ref{eqn:wheelspeedcalc}'te \acrshort{nw} tekerlek hızını, \acrshort{vveh}, araç hızını ve \acrshort{rw} tekerlek yarıçapını ifade eder. Tekerlek hızı hesabından sonra ayna, gezegen ve güneş dişli eşleştirmeleri sayesinde 
+motor hızlarına geçilebilir. Fakat bir dişlinin güç çifti oluşturduğu diğer dişliler değişebilmektedir. Örneğin, \ref{gucvesurusmodutahkimi} kısmında detaylı anlatıldığı üzere, düşük hızlarda ve uygun bataryada içten yanmalı motora ihtiyaç duyulmamaktadır.
+Bu sebeple içten yanmalı motorun bağlı olduğu gezegen dişli seti bir taşıyıcı yardımıyla geriye çekilerek sistem ayrılır. Bu sayede sürtünmeden kaynaklı kayıpların önüne geçilir, sistemin ömrü uzatılır.
+Dişli kutusu modellenirken de bu farklı sistem durumları göz önünde bulundurulmuştur. Referans alınan güç ayrımı cihazında planet dişli setinden 2 adet yer almaktadır. Buradaki amaç çekici motoru doğrudan tekerleklerin olduğu sisteme bağlarken farklı bir dişli oranı kullanmaktır. İçten yanmalı motor da ikincil planet dişli setinde yer aldığı için 
+motorların çalışması sırasında motor hızlarının çalıştığı bölgelerde yüksek esneklik sağlanabilmektedir.
+Oluşturulan farklı kinematik sistemler için farklı alt model sistemleri oluşturulmuş bu sayede hibrit sistemde yer alan motorların hız bağıntıları kurulmuştur.
+Bu girdiler aracılığıyla oluşturulan sistemin çıktıları ise içten yanmalı motor (\acrshort{iym}) hızı, motor-jeneratör (\acrshort{mg1}) hızı ve çekici motor (\acrshort{mg2}) hızıdır. 
+Bu alt sistemin yer aldığı görsel Şekil \ref{fig:dislikutusu}'te bulunabilir.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{gorseller/dislikutusu}
+    \caption{Dişli Kutusu Çevrim Oranları Alt Sistemi}\label{fig:dislikutusu}
+\end{figure}
+
+\subsection{Üretilen Güç}
+
+Bir motorun ürettiği güç, motorun torku ve hızı ile orantılıdır. Bu ilişki aşağıdaki şekilde ifade edilebilir (\cite{Heywood}). 
+
+\begin{equation}
+    P_{motor}=\frac{T_{motor}N_{motor}}{9548.8}
+    \label{eqn:motortorkguc}
+\end{equation}
+
+Motorun elektrikli veya içten yanmalı olmasından bağımsız olarak, her motorun karakteristik bir devir-tork eğrisi vardır. Bir içten yanmalı motor için örnek tork-güç eğrisi Şekil \ref{fig:rpmpowertorquecurves}'te verilmiştir. 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{gorseller/rpmpowertorquecurves}
+    \caption{Motor devrine bağlı tork ve güç eğrileri (\cite{engpowertorquecurve})}\label{fig:rpmpowertorquecurves}
+\end{figure}
+
+\ref{dislikutusucevrimoranlari} kısmında bulunan motor hızları aracılığıyla motor torkları bulunur. Motor torkları bulunduktan sonra ise denklem \ref{eqn:motortorkguc} sayesinde her bir motor için üretilen güç bulunur. 
+Bu sayede hibrit motor sisteminin o an için üretebileceği toplam güç ve eğer gerekliyse bataryanın ne kadar şarj edilebileceği bulunabilir. Güç hesabına yarayan bu alt sistemin girdileri sırasıyla 
+ \acrshort{iym} hızı, \acrshort{mg1} hızı ve \acrshort{mg2} hızı; çıktıları ise ise ilgili motorların üretebilecekleri mevcut güçlerdir. Alt sistemin görüntüsü Şekil \ref{fig:uretilenguc}'de verilmiştir.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{gorseller/uretilenguc}
+    \caption{Üretilen Güç Alt Sistemi}\label{fig:uretilenguc}
+\end{figure}
+
+\subsection{Güç ve Sürüş Modu Tahkimi}
+\label{gucvesurusmodutahkimi}
+
+Hibrit sistemlerin kontrolcülerinde pek çok yaklaşım bulunabilmektedir. Bu kontrolcüler sistemdeki farklı parametreleri gözlemleyerek gereken tahkimleri yapmaktadırlar.
+Bu çalışmada ise sistem parametrelerine göre güç ve sürüş modu tahkimi yapılmıştır. Tahkimin algoritması Şekil \ref{fig:surusmodualgo}'da verilen mantık akışına göre çalışmaktadır.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{gorseller/surusmodualgo}
+    \caption{Güç ve Sürüş Modu Tahkimi Mantık Akışı}\label{fig:surusmodualgo}
+\end{figure}
+
+Kontrolcü, sürüş çevriminedn gelen taşıt sistem ivme isteğini inceler. İvmenin negatif olduğu durumlarda çeşitli frenlemeler sayesinde araç yavaşlayabilir. Basitleştirilmemiş sistemlerde GPS (Global Positioning System- Küresel Konumlama Sistemi) aracılığı ile yol ve çevresel şartlar, öndeki ve arkadaki diğer taşıtlar, ilerideki yolun eğim durumu, batarya ve sistem sıcaklıkları gibi pek çok parametre 
+çevrim dışı yani kural bazlı veya çevrim içi yani anlık olarak gözlemlenebilmektedir. Bazı kabuller yardımıyla basitleştirilmiş bu çalışmada ise asıl tahkim, ivmenin pozitif olduğu hızlanma durumlarındadır.
+Hızlanma gerekirken kontrol edilen başlıca parametreler ise araç hızı ve batarya şarj durumudur. Öncelikli olarak araç hızı kontrol edilir. Araç hızı 0'dan büyük ve araç hızı alt sınırının altındaysa ve batarya şarj durumu, batarya şarj durumu alt sınırının üstündeyse sistem tahriği sadece elektrikli motordan alır.
+Bu sayede elektrikli motorun düşük hızlardaki yüksek torkundan yararlanılarak rahat bir kalkış sağlanır. Aynı zamanda içten yanmalı motor çalıştırılmadığı için emisyon değeri de 0 olarak kabul edilebilir.
+Batarya şarj durumu değerinin alt sınırının altında olmasında ise sistemdeki içten yanmalı motor hem tahriği hem de batarya şarjını sağlar. Bu sayede taşıta gerekli olan ivme sağlanarak taşıt hareket ederken, çekici motorun da ileride kullanabilmesi için gerekli batarya gücü üretilir.
+Araç hızı, araç hızı alt sınırının üstüne çıktığında ise tekrardan batarya kontrol edilir. Eğer bataryanın şarj durumu alt sınırın altındaysa içten yanmalı motor ile hızlanma korunurken batarya bir önceki modda olduğu gibi şarj edilir.
+Eğer bataryanın şarj durumu alt ve üst sınırlar arasında ise, çekiş kuvveti hesabı yapılır. Çekiş kuvveti hesabından gelen gerekli çekiş gücü ile anlık olarak içten yanmalı motorun üretebileceği güç kıyaslanır. İçten yanmalı motorun gücü sisteme gerekli
+ivmeyi kazandırmaya yetiyorsa sadece içten yanmalı motor ile tahrik sağlanır. Eğer içten yanmalı motorun mevcut gücü sistemi ivmelendirmeye yetmiyorsa içten yanmalı motor ve çekiş motorlarının güç ayrım cihazına aynı anda güç aktarması sağlanır ve tahrik her iki motor tarafından elde edilir.
+Sistemi ivmelendirmek için gerekli çekiş gücünün her iki motorun ürettiği toplam güçten küçük veya eşit olması beklenir. Bu durum ise endüstride bir optimizasyon problemi olarak yer alabilmektedir. Eğer gerekli çekiş gücü yüksekse bu gücü sağlayacak motorlar da görece büyük olacaktır. Büyük motorlar ise az gücün gerektiği bölgelerde 
+verimsiz çalışabilir. Tasarıma başlanmadan önce sistemin çalışma koşulları değerlendirilerek ihtiyaçlar belirlenmeli ve bu ihtiyaçları karşılayacak motor sistemleri kurulmalıdır.
+
+Bu algoritmanın Simulink ortamında oluşturulmuş alt sistemin görüntüsü Şekil \ref{fig:gucvesurusmodtahkim}'de verilmiştir. 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{gorseller/gucvesurusmodtahkim}
+    \caption{Güç ve Sürüş Modu Tahkimi Alt Sistemi}\label{fig:gucvesurusmodtahkim}
+\end{figure}
+
+\subsection{Batarya Güç Tüketim Hesabı}
+\label{bataryaguctuketimhesabikismi}
+
+Güç ve sürüş modu tahkimi yapıldıktan sonra, bataryadan anlık olarak çekilecek güç veya bataryaya anlık olarak beslenecek güç bilinecektir. Bu sayede yapılan tüm tahkimler pozitif veya negatif tek bir sayısal ifadeye çevrilerek
+batarya kontrolü basitleştirilecektir. Yani bu alt sistemin yegane çıktısı hibrit motor sisteminin batarya ile arasındaki elektriksel güç aktarım değeridir.
+Modlara bağlı olan bu alt sistemin \ref{sarjdurumuhesabikismi} alt sistemine sağladığı güç çıktısının modeli Şekil \ref{fig:batguctukhes}'de görülebilmektedir.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{gorseller/batguctukhes}
+    \caption{Batarya Güç Tüketim Hesabı Alt Sistemi}\label{fig:batguctukhes}
+\end{figure}
+
+\subsection{Şarj Durumu Hesabı}
+\label{sarjdurumuhesabikismi}
+
+Kontrolcüde yer alan bu şarj durumu hesabı alt sisteminin amacı, anlık olarak sistemin şarj durumunu hesaplamaktır. Her an için hesaplanan şarj durumu, bir sonraki ana ait tahkimde kullanılmaktadır.
+Bataryanın herhangi bir çevrimde başlangıç şarj durumu (\acrshort{soci}), batarya güç tüketim hesabından gelen değer ile sürekli olarak güncellenir. Bu güncellenmiş değer bataryanın alt ve üst şarj durumu değerleri ile kıyaslanabilmesi için
+diğer alt sistemlere gönderilir. Bu çalışmada yer alan tüm sürüş çevrimlerinde alt ve üst sınır şarj durumu değerleri olarak sırasıyla \%50 ve \%80 şarj durumu alınmıştır. Farklı bataryaları da modelleyebilmek amacıyla
+bataryanın kapasitesi, batarya voltajı, bataryadaki hücre sayısı, bataryanın akım-saat miktarı vb. ile parametrik olarak modellenmiştir. Bu işlemleri ve başlangıç değerini içeren kontrolcü sistem
+görseline Şekil \ref{fig:soccalc}'de yer verilmiştir.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{gorseller/batguctukhes}
+    \caption{Şarj Durumu Hesabı Alt Sistemi}\label{fig:soccalc}
+\end{figure}
+
+\section{Sürüş Çevrimi Kütüphanesi}
+\ref{suruscevrimlerilit}'te bahsedilen sürüş çevrimleri, kütüphane olarak Simulink ortamına aktarılmıştır. Aktarılan bu kütüphaneler zamana karşılık sistemin hız, ivme ve mesafe değerlerini içermektedir. Birbirlerine bağlanan alt sistemler nihai olarak
+bu kütüphanelere bağlanarak simulasyon çalıştırılmıştır. 
+Sistem değişse bile sürüş çevrimi kütüphaneleri bir kez oluşturulduktan sonra istenildiği gibi kullanılabilmektedir. Kütüphanelerin parametrik olması, 
+gelecekteki çalışmalarda da modelleme esnekliği sağlamaktadır.
+Oluşturulan sürüş çevrimi kütüphaneleri Şekil \ref{fig:suruscevrimkutuphane}'te görülebilir. Her bir simulasyonun sonucu elde edilen zamana bağlı batarya şarj
+durumu başlık \ref{sonuclarveoneriler}'te paylaşılmıştır.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{gorseller/suruscevrimkutuphane}
+    \caption{Simulink Sürüş Çevrimi Kütüphanesi}\label{fig:suruscevrimkutuphane}
+\end{figure}
+
+
+
+ 

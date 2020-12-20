@@ -1,0 +1,91 @@
+\chapter{SONUÇLAR VE ÖNERİLER}
+\label{sonuclarveoneriler}
+
+Önceki kısımlarda anlatılan ve Simulink ortamında geliştirilen kontrolcü ile bir içten yanmalı ve elektrik motorundan oluşan,
+güç ayrım cihazlı, seri-paralel hibrit motor sistemi farklı sürüş çevrimlerinde analiz edilmiştir. Her bir sürüş çevrimi için, batarya şarj durumunun zamana bağlı değişimi gösteren
+sonuçlar grafikleri ilgili görsellerde paylaşılmıştır. Şekil \ref{fig:nedcsoc}, Şekil \ref{fig:wltpsoc}, Şekil \ref{fig:ftpsoc} ve Şekil \ref{fig:hfetsoc}'te \%90'dan başlayan batarya şarj durumu;
+Şekil \ref{fig:nedc2soc}, Şekil \ref{fig:wltp2soc}, Şekil \ref{fig:ftp2soc} ve Şekil \ref{fig:hfet2soc}'te \%60'dan başlayan batarya şarj durumu;
+Şekil \ref{fig:nedc3soc}, Şekil \ref{fig:wltp3soc}, Şekil \ref{fig:ftp3soc} ve Şekil \ref{fig:hfet3soc}'te ise \%30'dan başlayan batarya şarj durumu
+içeren çevrimler paylaşılmıştır. Bu sayede sürüş koşullarına ek olarak başlangıç koşullarındaki farklılıklar da incelenebilmiştir.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{gorseller/nedcsoc}
+    \caption{NEDC SoC-Zaman Grafiği - SoCi \%90}\label{fig:nedcsoc}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{gorseller/wltpsoc}
+    \caption{WLTP SoC-Zaman Grafiği - SoCi \%90}\label{fig:wltpsoc}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{gorseller/ftpsoc}
+    \caption{FTP-75 SoC-Zaman Grafiği - SoCi \%90}\label{fig:ftpsoc}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{gorseller/hfetsoc}
+    \caption{HFET SoC-Zaman Grafiği - SoCi \%90}\label{fig:hfetsoc}
+\end{figure}
+%
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{gorseller/nedc2soc}
+    \caption{NEDC SoC-Zaman Grafiği - SoCi \%60}\label{fig:nedc2soc}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{gorseller/wltp2soc}
+    \caption{WLTP SoC-Zaman Grafiği - SoCi \%60}\label{fig:wltp2soc}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{gorseller/ftp2soc}
+    \caption{FTP-75 SoC-Zaman Grafiği - SoCi \%60}\label{fig:ftp2soc}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{gorseller/hfet2soc}
+    \caption{HFET SoC-Zaman Grafiğ - SoCi \%60}\label{fig:hfet2soc}
+\end{figure}
+%
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{gorseller/nedc3soc}
+    \caption{NEDC SoC-Zaman Grafiği - SoCi \%30}\label{fig:nedc3soc}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{gorseller/wltp3soc}
+    \caption{WLTP SoC-Zaman Grafiği - SoCi \%30}\label{fig:wltp3soc}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{gorseller/ftp3soc}
+    \caption{FTP-75 SoC-Zaman Grafiği - SoCi \%30}\label{fig:ftp3soc}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{gorseller/hfet3soc}
+    \caption{HFET SoC-Zaman Grafiği - SoCi \%30}\label{fig:hfet3soc}
+\end{figure}
+
+Oluşturulan kontrolcünün, \ref{sarjdurumuhesabikismi} kısmında belirtildiği üzere batarya sarj durumunun hedeflenildiği gibi alt ve üst sınırlar arasında tutulabildiği, farklı sürüş çevrimleri için 
+gösterilmiştir. Sürüş çevrimleri karşılaşılabilecek çoğu sürüş modunu kapsadığı için kontrolcünün de sağlamlılığı bu sayede kanıtlanmıştır. \ref{hfetsubsec}'te de belirtildiği üzere, HFET yüksek hızları içeren, duraklamasız ve kısa bir çevrim olduğu için düşük başlangıç şarj durumlarından hareket edilen 
+durumlarda üst sınıra gelmeden çevrimin tamamlandığı görülmüştür. Bu çevrim de zaten otoban sürüşünü temsil ettiği için ilgili durum beklenen bir sonuç olmuştur. Şarjın hiçbir zaman alt sınırın altına düşmesine izin verilmediği için, bataryanın derin deşarjı da engellenmiştir. Bu sayede 
+herhangi bir zaman diliminde hem sistem operasyonel kalmıştır hem de batarya sağlığı korunmuştur.
+
+Bu kontrolcü modellemesi, bir adet içten yanmalı motorun ve ilaveten her tekerlekte bir adet elektrik motorunun bulunduğu farklı hibrit motor sistemlerinin de 
+modellenebilmesi amacıyla örnek teşkil etmektedir. Yakıt hücresi vb. içeren sistemlerdeki batarya koruma yaklaşımları da gerektiğinde bu kontrolcüye eklenerek, farklı güç kaynakları için 
+daha karmaşık ve sağlam bir kontrolcü elde edilebilir.  
+

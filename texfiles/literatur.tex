@@ -1,0 +1,345 @@
+\chapter{LİTERATÜR ARAŞTIRMASI}
+
+\section{Hibrit Motor Sistemi Türleri}
+
+Hibrit motor sistemleri, kullanılan tahrik sistemleri, sistemdeki motorların güç dağılımı, tahriğin güç kaynaklarından aktarımı, kullanılan yakıtların türü vb. birden fazla şekilde sınıflandırılabilir. Bu tez çalışmasında ise
+hibrit motor sistemleri tahriğin güç kaynaklarından aktarım çeşitlerine göre ayrılmasını irdelemiştir. Güç kaynaklarından 
+tahrik ortamlarına gücün aktarımının çeşitlerine göre, seri, paralel ve seri-paralel olmak üzere 3 çeşit hibrit motor sistemi vardır (\cite{typesofhybrid}).
+Güç ayrım cihazlı hibrit sistemler seri-paralel hibrit motor sistemleridir. Seri-paralel sistemin ve güç ayrım cihazının avantajları ve özellikleri sırasıyla \ref{seriparalelhibrit} ve \ref{gucayrimcihazi}'te paylaşılmıştır.
+
+\subsection{Seri Hibrit}
+\label{serihibrit}
+Genel tanım itibariyle seri hibrit motor sistemleri tahriğin tek bir elektrik motoru tarafından sağlandığı, ikincil güç kaynağının ise ana elektrik motorunun beslendiği
+bataryayı şarj etmek için kullanıldığı sistemlerdir. Bu sistemlerin en yaygını elektrik motorunun tekerleklere gücünü aktardığı, içten yanmalı motorun ise güç aktarım sisteminden ayrı ve yakıt bakımından
+en verimli noktada çalıştırıldığı sistemlerdir. Böylece hem yakıttan tasarruf edilecek hem de emisyonlar düşük tutulacaktır. Bu sistemlerin dezavantajları tahrik sisteminde yedeklilik olmaması,
+tek motor kullanımından gelen düşük tahrik gücü ve düşük menzildir. Fakat yakıt tüketimi bakımından ise en avantajlı ve sistem karmaşıklığı açısından
+en az karmaşık sistemlerdir (\cite{serieshybrid}).
+
+\subsection{Paralel Hibrit}
+\label{paralelhibrit}
+Paralel hibrit motor sistemleri, gücün 2 farklı tür güç kaynağı tarafından tahrik organlarına iletilmesi sonucu oluşur.
+Bu sistemin en büyük avantajı üretilen gücün, sistem karmaşıklığına oranla en yüksek olduğu sistemlerdir. Yaygın olarak elektrikli motor ve içten yanmalı motordan oluşan
+sistemlerdir. Tahrik çoğu zaman içten yanmalı motor tarafından sağlanırken, elektrik motoru tek başına ve düşük araç hızlarında ve en yüksek gücün gerektiği yüksek hızlarda içten yanmalı motora takviye olarak
+çalışmaktadır. Bu sayede sıradan bir içten yanmalı motorun yer aldığı sistemlere göre hem yakıt tasarrufu hem de fazladan güç sağlanabilmektedir. Bu sistemin dezavantajı ise içten yanmalı motor bataryayı besleyecek şekilde tasarlansa bile, seri hibrit motor sistemlerindeki gibi en verimli noktada çalışma imkanı 
+her zaman yer almayacağı için batarya şarj durumunun ideal biçimde korunamamasıdır (\cite{parallelhybrid}).    
+
+\subsection{Seri-Paralel Hibrit}
+\label{seriparalelhibrit}
+Seri-paralel hibrit motor sistemleri adından da anlaşılacağı üzere hem seri hem de paralel modlarını içeren motor sistemleridir. Asıl amaçları
+seri ve paralel sistemlerin avantajlarını ayrı ayrı kullanarak dezavantajları ortadan kaldırmaktır. Genellikle bir içten yanmalı motor bir de elektrik motorundan oluşan sistemlerdir. 
+Ağırlık, maliyet ve karmaşıklık bakımından hibrit motor sistemleri arasındaki en karışık sistemlerdir. Fakat sahip olduğu avantajlar sayesinde bu dezavantajları dengelemektedir.
+Seri hibrit motor sistemlerinin aksine seri-paralel hibrit motor sistemleri yüksek çekiş gücüne sahiptir. Aynı zamanda paralel hibrit motor sistemlerinin aksine 
+içten yanmalı motoru şarj moduna geçirerek bataryayı şarj edebilecekleri için menzilleri de yüksektir (\cite{seriesparallelhybrid}). Seri-paralel motor sistemlerinde motorlar
+hem elektriksel hem de mekanik olarak birbirlerine bağlıdırlar. Bu bağlantılar mod geçişleri için kaldırılabilir veya tekrardan kurulabilir. Bu sayede ilgili kontrol stratejisi devreye alındığında
+o anki parametreler gözden geçirilerek optimum sistem çıktısı yakalanır. Hibrit motor sistemleri arasında fiziksel karmaşıklığa ek olarak, kontrol sistemi bakımından da 
+en karmaşık sistemlerdir. Sistemde yer alan eyleyici ve sensörlere ek olarak, mod optimizasyonu bu sistemlerde büyük önem taşır. İki sistemin de avantajlı olduğu noktaları öne çıkartmak adına 
+modlar iyice irdelenmelidir. Seri-paralel sistem için yer alan mod geçişlerine sahip bir kontrolcü \ref{gucvesurusmodutahkimi} kısmında detaylıca anlatılmıştır. 
+
+
+\ref{serihibrit}, \ref{paralelhibrit} ve \ref{seriparalelhibrit} alt başlıklarında anlatılan sistemlerin, güç aktarım şematikleri
+Şekil \ref{fig:gucaktarimsematikleri}'te verilmiştir. Şekilde (a) sadece içten yanmalı motordan oluşan sistemi, (b) seri hibrit sistemi, (c) paralel hibrit sistemi, 
+(d) seri-paralel hibrit sistemi göstermektedir. Aynı zamanda, "E" içten yanmalı motoru, "T" güç aktarım sistemini, "G/I" jeneratör ve inverteri, "M/I" motor ve inverteri, "B" 
+bataryayı ve "W" tekerlekleri temsil eder (\cite{hibritmotorturlerisematikleri}).
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{gorseller/gucaktarimsematikleri}
+    \caption{Hibrit Motor Sistemi Güç Aktarım Şematikleri (\cite{hibritmotorturlerisematikleri})}\label{fig:gucaktarimsematikleri}
+\end{figure}
+
+
+
+\section{Elektrik Motoru ve İçten Yanmalı Motordan Oluşan Hibrit Motor Sistemi}
+
+Aracın, hareket için 2 farklı güç kaynağı kullandığı hibrit sistemlerin en yaygını, \acrfull{dc} bataryaya
+bağlı bir içten yanmalı motor ve bir veya daha fazla elektrik motorunun olduğu sistemlerdir (\cite{gm2013}).
+Toyota firmasının hibrit modelleri biri benzinli diğeri de elektrikli olmak üzere 2 motora sahiptir (\cite{toyota2020}).
+Bu yüzden de hibrit motor sistemi modelinin simulasyonunu koşturmak amacıyla 
+Toyota firmasının Prius Gen 3 (2010) model aracı seçilmiştir.
+
+\subsection{İçten Yanmalı Motor}
+
+İçten yanmalı motorlar, bir yanıcının ve bir yakıcının yanma odasında yanması sonucu güç üreten sistemlerdir. Gaz türbinleri, jet motorları, Wankel motorlar ve
+pistonlu motorlar içten yanmalı motorlara örnek olarak verilebilir (\cite{Heywood}). Bu çalışmada ise emme, sıkıştırma, yanma ve egzoz olmak üzere 4 zamanlı
+ve benzinle çalışan, 73 kW güce sahip bir pistonlu motor yer almaktadır. Benzinli motorların emisyonları dizel motorlardan daha düşük olmaktadır (\cite{icctgasvsdis}). Hibrit
+motor sistemlerinin kullanım amacı ve cevap verdiği sorunlar da düşünüldüğünde, 4 zamanlı ve benzinli motorlar hibrit motor sistemleri için çok uygundur.
+
+
+\subsection{Elektrikli Motor}
+\label{elektriklimotor}
+Elektrik motoru, isminden de anlaşılacağı üzere, elektrik enerjisini mekanik enerjiye çeviren bir makinedir. Elektrik motorları, 
+motorun manyetik alanıyla, tel sargının etkileşimi sonucu motor şaftı üzerine tork uygulayarak çalışır. Enerjinin sağlandığı kaynağın türüne göre
+\acrfull{dc} ve \acrfull{ac} olmak üzere 2 grupta incelenebilir. \acrshort{dc} kaynaklara, bataryalar, rektifiyerler; \acrshort{ac} kaynaklara ise
+inverterler ve elektrik jeneratörleri örnek olarak verilebilir. Elektrikli motorları aynı zamanda
+fırçalı ve fırçasız, hava ve sıvı soğutmalı, 1 veya 3 fazlı olarak da ayırabiliriz. (\cite{electricmotor}).  Bu tezde yer alan elektrik motoru ise 3-fazlı, yüksek voltajlı,
+\acrshort{ac} tür, 60 kW güce sahip bir motordur. 3-fazlı elektrik gücü elektrik güç üretimi, transferi ve dağılımında yaygın bir metoddur. Büyük motorları ve
+yüksek yükleri beslemek için yaygın olarak kullanılır. Simetrik bir 3-faz sisteminde aynı frekans ve voltaj genliğine sahip 3 iletken, ortak bir referansı baz alacak şekilde
+bir çevrimin 3'te 1'i yani 120° faz farkıyla sinyali iletirler. Bu sayede tek fazlı sistemlere göre aynı voltaj değerinde 3 kat daha yüksek akım taşıyabilirler.
+Aynı yükü taşıdıkları için iletkenlerin de boyutlarının aynı olması, tasarım ve üretim bakımından da kolaylıklar sağlar. (\cite{threephase}) 
+Bu tezdeki taşıtta yer alan elektrik motoru, doğrudan tekerleklere bağlı olduğu için, hem yavaşlama anında bataryayı şarj eder hem de
+rejenaritf fren sağyesinde hidrolik frene göre daha pürüssüz bir yavaşlama sağlar (\cite{regenbreak}).  
+
+
+
+\subsection{Jeneratör}
+
+Elektrik jeneratörü, elektrik motorunun aksine, asıl amacı mekanik enerjiyi elektrik enerjisine çevirmekte kullanılan makinelerdir. Yapısal olarak bakıldığı zaman elektrik
+motorundan bir farkları yoktur. Hibrit motor sistemlerindeki jeneratörler ise, aynı zamanda içten yanmalı motora marş motoru görevi görmektedir. Bu sayede hem ağırlıktan hem de
+yerden tasarruf edilir. Hibrit motor sistemlerinde jeneratörler aynı zamanda  içten yanmalı motorun ürettiği gücü bataryayı beslemekte kullanır. Yani 
+hibrit motor sistemlerindeki jeneratörler, alışılagelmiş ve sadece içten yanmalı motorun tahriği sağladığı araçların aksine hem alternatör hem de 
+marş motoru görevi gören daha kompleks yapılardır. Güncel teknolojiye sahip, sadece içten yanmalı motorlu araçlarda da bu teknoloji benimsenmeye başlanmıştır. Böylece
+aynı amaca hizmet eden farklı araçlarda benzerlik sağlanmış ve maliyet azalmıştır (\cite{generator}) Bu tezde yer alan jeneratör ise 3-fazlı
+yüksek voltajlı, \acrshort{ac} tür,  42 kW güce sahip bir jeneratördür.
+
+
+
+\section{Güç Ayrım Cihazı}
+\label{gucayrimcihazi}
+Güç ayrım cihazı seri-paralel hibrit motor sistemlerinde yer alan bir otomatik şanzıman türüdür. Mekanizma temelinde
+planet dişli sistemi vardır. Güncel teknolojilerde ise birden fazla planet dişli sistemini içeren güç ayrım cihazları yer almaktadır (\cite{gucayrimcihaziref}).
+Planet dişli sistemlerinin mekanizma yönünden güç ayrım cihazında kullanımı ve ilişkileri \ref{PlanetDisliLiteratur}'te verilmiştir.
+Başlıca otomatik şanzıman türlerine örnek olarak sürekli değişken oranlı şanzıman (CVT), çift kavramalı şanzıman (DCT veya DSG), otomatikleştirilmiş manuel şanzıman (AMT) vs. verilebilir.
+Güç ayrım cihazı ise aslında kullanılan cihazın adı olmasına rağmen, kritik ve yenilikçi bir sistem olduğu için seri-paralel hibrit motor sistemlerindeki aktarıma kendi adını 
+verebilmiştir. Güç ayrım cihazının yer aldığı sistemlerdeki motorlar tekerlek hızı ve diğer motorlardan farklı
+hızlarda dönerek istenilen çalışma bölgelerinde tutulurlar. Sistemin o anki ihtiyacına göre modlar arasındaki geçiş, aslında güç ayrım 
+cihazının içerisinde yer alan parçaların birbirleriyle güç çifti oluşturmalarına veya önceden oluşturulmuş çiftlerin ayrışmasına dayanır. 
+
+
+\subsection{Planet Dişli ve Güç Ayrım Cihazı İlişkileri}
+\label{PlanetDisliLiteratur}
+
+Güç ayrım cihazının dişli sistemindeki her bir dişli bir motora veya aktarım organına bağlıdır. Sistemin mekanizması incelendiğinde ise, güç ayrım cihazının çalışma prensibi bakımından
+karmaşık ve ileri seviye bir planet dişli seti olduğu görülmektedir. Planet dişli seti sahip olduğu avantajlardan dolayı pek çok yerde kullanılmaktadır. Bu avantajların başlıcaları
+yüksek tork-ağırlık oranı, yüksek şanzıman oranları, düşük gürültü, düşük titreşim ve yüksek sıkılıktır (\cite{planetdislireferans}). Basit bir güç ayrım cihazındaki dişliler ile motorların eşleşmesi ise Çizelge \ref{tab:planetdisliisimlertablo}'te paylaşılmıştır.
+
+\begin{table}
+    \centering
+    \caption{Planet Dişli - Motor Türü Eşleşme Tablosu}\label{tab:planetdisliisimlertablo}
+    \begin{tabular}{|l|l|l|}
+    \hline
+    \textbf{Motor Türü}      &\textbf{Dişli Türü}     \\ \hline
+    İYM                      & Gezegen Dişli          \\ \hline
+    Jeneratör                & Güneş Dişli            \\ \hline
+    Elektrik Motoru          & Ayna Dişli             \\ \hline
+\end{tabular}
+\end{table}
+
+Dişli kutusu çevrim oranları yardımıyla motor hızları aşağıdaki gibi
+basitçe hesaplanabilir (\cite{planetgeartrainreferans}).
+\begin{equation}
+    -\frac{N_r}{N_s}=\frac{\omega_s-\omega_c}{\omega_r-\omega_c} \quad(\omega_r\neq\omega_c)
+\end{equation}
+
+$\omega_r$ ile $\omega_c$ değerlerinin eşit olduğu durumlarda sistemin kinematik çözümü bize planet dişli sistemdeki 3 dişlinin
+de hızlarının eşit olmasını ifade eder.
+
+\begin{equation}
+    \omega_c=\omega_r=\omega_s
+\end{equation}
+
+\section{Numerik Modelleme}
+
+Numerik modelleme, fiziksel vb. problemlerin büyük matematik denklem setlerinin oluşturulması ve daha sonrasında
+oluşturulan bu denklem setlerinin çözümüne denir. Günümüzde numerik modellemeleri oluşturmak ve analiz etmek adına bilgisayarlar 
+kullanılmaktadır. Numerik modelin başlıca avantajları, düşük maliyet, yüksek sonuç alma hızı,
+yüksek tekrarlanabilirliktir (\cite{numerikmodellemereferansbir}). 
+
+Numerik modelleme yapılırken çözülmek istenilen probleme göre bir yaklaşım sergilenmektedir. Karmaşık iç geometriye
+sahip bir sistemin içerisinden geçen akış incelenmek istendiğinde sonlu hacimler metodu ile hesaplamalı akışkanlar dinamiği
+yaklaşımı kullanılabilir. Veya basit ve detaysız bir plakanın ısı transferi incelenirken sonlu fark metodu ile 1-Boyutlu analiz yönteminden yararlanılabilir.
+Spesifik problemlere ait çözümün belirlenmesi oluşturulan modelin doğruluğunu ve uygunluğunu arttırmaktadır (\cite{numericmodelfidelity}). Bu tezde yapılan modelleme 
+çalışmasında üzerinde durulan nokta bir taşıttaki hibrit motor sisteminin elemanları ve onların modellenmesidir. Örneğin aracı modellerken 
+havanın yarattığı sürtünme kuvveti için aracın hücum kenarındaki tüm ayrıntıları 3 boyutlu ve tek tek modellemek yerine aracın bir bütün olarak 
+sürükleme katsayısı kullanılmıştır. Ağırlık ise ağırlık merkezinden ve bir bütün olarak etkimektedir; koltuklar, motor vs. farklı sistemlerin tekil ağırlıklarının bir önemi olmamaktadır.
+Bu yaklaşım sayesinde modelin yönetimi ve hesaplamalı kısımları istenilen sonuçtan uzaklaşmayacak şekilde basitleştirilebilmiştir.   
+
+Numerik modelleme, oluşturulan sistemin başlangıç ve sınır koşulları yardımıyla analizini sağlayacak şekilde herhangi bir 
+platformda yapılabilir. Bu çalışmada hibrit motor sisteminin kontrol algoritması akademi ve endüstri dünyasında da yaygın olan MATLAB
+programının SIMULINK modülünde yapılmıştır. Platformun incelenmesi \ref{matlabsimulink}'te; modelin detaylı irdelenmesi ise \ref{simhibmotsistasmod} kısmında paylaşılmıştır. 
+
+\subsection{MATLAB \& SIMULINK}
+\label{matlabsimulink}
+
+MATLAB, yüksek sayıda mühendis ve araştırmacı tarafından kullanılan, matriks ve dizinleri iteratif biçimde doğrudan uygulayabilen, kod parçalarını veya arayüzleri 
+oluşturmaya yarayan bir platformdur. Kendisine ait, yüksek performanslı ve paket halinde bir yazılım dili vardır. Diğer yazılım dillerinden farkı
+platformu bilgisayara yüklerken pek çok kütüphanenin, gömülü fonksiyonun ve arayüzlerin de yüklenmesidir. Bu durum kullanıcıya modelleme açısından bir hayli kolaylık sağlamaktadır.
+Özellikle çözüm süresinin modelleme süresine oranı düşük olan durumlarda MATLAB diğer yazılım dillerinden öne çıkmaktadır. Kod oluşturma fonksiyonu sayesinde ise
+MATLAB modeli ve içerisindeki tüm fonksiyonlar C/C++ dillerine dönüştürülebilir. Böylece platformdan bağımsızlık sağlanarak yazılımın gömülü sistemler vb. işletim ortamlarında da kullanılma imkanı gerçekleştirilir  (\cite{matlabnedir}).
+
+Simulink ise çoklu alan dinamik sistemleri modelleme, simule ve analiz etmeye yarayan MATLAB tabanlı bir programlama ortamıdır. Arayüzünde yer alan hazır bloklar ile çalışır. Her bir blok 
+arka planda gömülü bir fonksiyonu temsil ettiği gibi özel isteğe uyarlanmış bir fonksiyonu da içerebilir.
+Modeller, içerdikleri blok diyagramlar aracılığıyla, donanım seviyesi tasarıma geçmeden ve
+herhangi bir donanıma ihtiyaç duymadan sistem seviyesi tasarıma olanak sağlar. Birden fazla adi diferansiyel denklem çözücüsü sayesinde kullanıcıya farklı türde problemlerin
+çözümü için ortam sunar.
+Simulink kütüphanesinde yer alan blokların örnek görseli Şekil \ref{fig:simulinkkutuphanegorseli}'nde verilmiştir. (\cite{simulinknedir}).
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{gorseller/simulinkkutuphanegorseli}
+    \caption{Örnek Simulink Kütüphanesi}\label{fig:simulinkkutuphanegorseli}
+\end{figure}
+
+\section{Sürüş Çevrimleri}
+\label{suruscevrimlerilit}
+Farklı taşıtları, aktarım sistemlerini veya motor sistemlerini birbirleriyle kıyaslamak istediğimizde ortaklaştırma yapmamız gerekmektedir.
+Sürüş çevrimleri ise bu konuda sıkça kullanılan karşılaştırma ve analiz etme yollarıdır. Sürüş çevrimleri zamana bağlı araç hızını ve dolayısıyla
+buna bağlı olarak gerekli ivmeyi ve çekiş gücünü ifade eder. Sürüş çevrimleri birtakım karmaşık hızlanma, yavaşlama, sabit hızda gitme ve duraklamadan oluşmaktadır.
+Sürüş çevrimi sayesinde güç, yakıt tüketimi, emisyon, taşıt menzili vb. pek çok parametre objektif olarak birden fazla platform için karşılaştırılabilir (\cite{suruscevriminedir}).
+Sürüş çevrimleri yapılan sürüş testlerinde toplanılan verilerle oluşturulabileceği gibi bazı çevrimler teorik olarak kağıt üzerinde oluşturulmuştur.
+Literatürde pek çok sürüş çevrimi vardır fakat bu çalışmada başlıca 4 tane çevrim kullanılmıştır: NEDC, WLTP, FTP, HWFET/HFET. 
+Bahsedilen sürüş çevrimlerinin özet özellikleri Çizelge \ref{tab:drivingcycletable}'te paylaşılmıştır.
+
+\begin{table}
+    \centering
+    \caption{Farklı Sürüş Çevrimi Özellikleri}\label{tab:drivingcycletable}
+    \begin{tabular}{|l|l|l|l|}
+    \hline
+    \textbf{Çevrim Adı} & \textbf{Mesafe (m)} & \textbf{Süre (s)} & \textbf{Ortalama Hız (m/s)} \\ \hline
+    NEDC                & 11023               & 1180              & 9.34                        \\ \hline
+    WLTP                & 23266               & 1800              & 12.92                       \\ \hline
+    FTP-75              & 17770               & 1874              & 9.47                        \\ \hline
+    HFET                & 16450               & 765               & 21.58                       \\ \hline
+\end{tabular}
+\end{table}
+
+\subsection{NEDC}
+\label{nedc}
+\acrfull{nedc}, Yeni Avrupa Sürüş Çevrimi anlamına gelen Avrupa Birliği'nde standart haline gelmiş bir sürüş çevrimidir. Bu çevrimin asıl amacı, hafif taşıt kategorisindeki taşıtların Avrupa Birliği standartlarına göre 
+kabul edilebilir emisyon değerlerine sahip olup olmadığını görmektir. Bu sürüş çevrimi son halini 1997 yılında almıştır. Avrupa Birliği'ne ek olarak Türkiye de 2018 yılına kadar üretilmiş Euro 3 ve sonrası taşıtların homologasyon sürecinde
+NEDC çevrimine göre elde edilen emisyon değerlerini baz almaktadır (\cite{nedcnedir}). 
+
+Bu çevrim gerçek hayattaki sürüş koşullarını yansıtan bir çevrim olmaması yönünden eleştirilmektedir. Taşıtların hafif ağırlıkta ve görece güçsüz olduğu dönemlerde ortaya çıkmıştır. Pek çok sabit hız seyrini ve rölanti çalıştırmasını içermektedir. 
+Bu sebeple gerçek hayattaki emisyon değerleriyle testte elde edilen değerler arasında yüksek miktarda fark olduğu iddia edilmektedir (\cite{nedcelestiri}).
+
+Bu sürüş çevrimi 2 kısımdan oluşmaktadır. İlk kısım 4 kez tekrar eden, görece düşük hızları içeren, şehir içi sürüş çevrimi yani \acrfull{udc}; ikinci kısım ise tekrar etmeyen, daha agresif ve yüksek hızları temsil eden şehir içi sürüş çevrimi \acrfull{eudc}.
+UDC 195 saniye sürer ve yaklaşık olarak 994 metredir. 3 çevrim sonucunda ortalama hız 18.35 km/h (5.1 m/s) iken teorik olarak 3976.1 metre yol katedilir. Çevrimin birleşik görüntüsü \ref{nedc}'te paylaşılmıştır.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{gorseller/nedc}
+    \caption{NEDC Hız-Zaman Grafiği}\label{fig:nedc}
+\end{figure}
+
+\subsection{WLTP}
+\ref{nedc}'te de bahsedilen problemler sebebiyle, gerçek hayat değerlerine yakın bir test ihtiyacı doğmuştur: \acrfull{wltp} yani Dünya Genelinde Uyumlaştırılmış Hafif Taşıtlar Test Prosedürü.
+WLTP 1 Eylül 2018 tarihinden itibaren üretilen tüm yeni binek otomobillerin test edildiği standarttır. NEDC'den farklı olarak, hibrit ve tam elektrikli taşıtların da yer aldığı bir standarttır. 
+Adından da anlaşılacağı üzere, emisyon ve yakıt tüketim değerlerini test etmek için dünya çapında uygulanmaya başlanan bir çevrimdir. Türkiye, Avrupa Birliği, Çin, Japonya, Güney Kore, Hindistan ve Amerika Birleşik Devletleri önde olmak üzere 
+pek geniş bir kısım tarafından kabul edilmiştir. Daha yüksek ortalama ve en yüksek hız, daha fazla sürüş koşulu (şehir içi, banliyö, ana yol ve otoban), daha uzun mesafe, daha yüksek ortalama ve en yüksek sürüş gücü, daha keskin hızlanma ve yavaşlama, tercihe bağlı ekipmanı ayrıca test etme, 
+WLTP çevriminin NEDC çevrimine göre başlıca farkları ve avantajlarıdır (\cite{wltpnedir}). 
+
+Bu tezde yer alınan taşıtın güç-ağırlık oranı 34'ten büyük olduğu için  3. sınıf çevrim alınmıştır. 3. sınıf çevrim farklı en yüksek hızlara sahip 4 alt kısımdan oluşmaktadır. Bu kısımlar ve özellikleri Çizelge \ref{tab:wltpclass3tablosu}'te, zamana bağlı hız grafiği ise Şekil \ref{fig:wltp}'te verilmiştir.
+
+\begin{table}
+        \centering
+        \caption{WLTP 3. Sınıf Çevrim Bölümleri}\label{tab:wltpclass3tablosu}
+        \begin{tabular}{|l|l|l|l|l|}
+            \hline
+            \textbf{Bölüm Adı} & \textbf{Temsil Edilen Senaryo} & \textbf{En Yüksek Hız (km/h)} & \textbf{Süre (s)} & \textbf{Mesafe (m)} \\ \hline
+            Düşük              & Şehir içi                      & 56.5                          & 589               & 3095                \\ \hline
+            Orta               & Banliyö                        & 76.6                          & 433               & 4756                \\ \hline
+            Yüksek             & Şehir Dışı                     & 97.4                          & 455               & 7162                \\ \hline
+            Çok Yüksek         & Otoban                         & 131.3                         & 323               & 8254                \\ \hline
+    \end{tabular}
+\end{table}
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{gorseller/wltp}
+    \caption{WLTP Hız-Zaman Grafiği}\label{fig:wltp}
+\end{figure}
+
+\subsection{FTP-75}
+\acrfull{ftp75}, Amerika Birleşik Devletleri Çevre Koruma Ajansı tarafından oluşturulmuş; binek araçların egzoz gazı emisyonlarını ve yakıt tüketimlerini ölçmeye yarayan bir dizi testlerden oluşmaktadır.
+Prosedürde yer alan dört testten birisidir. Başlıca amacı şehir sürüşünü ölçmektir. Bir soğuk bir de sıcak çalıştırmayı içeren bu çevrim şu ana kadar anlatılan diğer çevrimlerin aksine daha doğrusal olmayan yavaşlama ve hızlamaları içermektedir.
+505 saniye soğuk, 864 saniye soğuk-stabil ve 505 saniye sıcak çalıştırma kısımlarından oluşmaktadır (Şekil \ref{fig:ftp75}). Burada sıcak ve soğuktan kastedilen hava sıcaklığı değil motor sıcaklığıdır. Soğuk çalıştırma motorun ortam sıcaklığındaki halini; sıcak çalıştırma ise motorun bir süre çalıştıktan sonra kapatılıp, bir süre beklenip tekrardan çalıştırılmasını ifade etmektedir.
+Günlük hayatta olduğu gibi burada da sıcak ve soğuk çalıştırma bölgeleriyle daha gerçekçi bir test çevrimi hedeflenmektedir (\cite{ftp75nedir}).
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{gorseller/ftp75}
+    \caption{FTP-75 Hız-Zaman Grafiği}\label{fig:ftp75}
+\end{figure}
+
+\subsection{HFET}
+\label{hfetsubsec}
+HFET veya HWFET (\acrlong{hfet}), FTP-75 ile birlikte prosedürü oluşturan bir diğer çevrimdir. FTP-75'in aksine şehir içini değil otoban sürüşünü temsil eder.  Ortalama ve en yüksek hızlar sırasıyla 77 km/h ve 97 km/h olmaktadır (\cite{hfetnedir}). Diğer testlere göre kısa bir testtir (yaklaşık 12.6 dakika) fakat yüksek hızları içermesi sebebiyle 
+test edilen sistemler için zorlayıcı bir çevrimdir. Sıcak bir motorla yapılan bu testte aynı zamanda hiç duraklama yoktur (Şekil \ref{fig:hfet}).
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{gorseller/hfet}
+    \caption{HFET Hız-Zaman Grafiği}\label{fig:hfet}
+\end{figure}
+
+\section{Batarya}
+\label{bataryasection}
+Batarya, en yaygın tabirle, içerisinde yer alan kimyasal enerjiyi doğrudan elektrik enerjisine çeviren aygıtlara denir. Farklı boyutta ve türde, pek çeşitli malzemelerden oluşabilirler. 
+Bataryalar, benzin vb. sıradan petrol bazlı yakıtlarla kıyaslandığında çok düşük enerji yoğunluğuna (birim kütle başına düşen enerji) sahiptir. Bu da özellikle elektrik motorundan tahrik alan sistemlerde 
+yüksek önem taşır. İçten yanmalı motordan tahrik alan sistemlerdeki yakıt deposu ne ise elektrik motorlu sistemlerde de batarya odur. Yani bataryanın kapasitesi, elektriği iletim kapasitesi vb. parametreler elektrik motorunun 
+tahriği sağladığı sistemlerde fazladan üstünde durulması gereken bir konudur (\cite{bataryanedir}). 
+
+Günümüzde içten yanmalı motorların domine ettiği pazarlarda bataryalar motor ve araba kontrol sistemlerini beslemekte kullanılmaktadır.
+İçten yanmalı motora mekanik olarak bağlanmış alternatörler vasıtasıyla elektrik enerjisi üretilmekte ve bu enerji ile batarya şarj edilmektedir. Şarj edilen bu batarya sayesinde taşıt bir problem olmaksızın
+çalışmasını sürdürmektedir. Hibrit motor sistemlerinde ise sistemin türüne göre farklı batarya yönetim sistemleri mevcuttur. Çünkü sistemdeki bataryanın işlevi daha karmaşıktır. Hatta 
+sistemde birden fazla batarya bulunabilmektedir. Hibrit motor sistemlerinde ve sadece elektrikli motordan tahrik alınan taşıtlarda, \acrfull{ev}, batarya başlı başına bir optimizasyon problemidir.
+
+Bataryalar sisteme doğrudan bağlanmazlar. Bir taşıttaki tüm elemanlar alternatif akım veya doğru akım bazlı çalışmazlar. Bu sebeple bataryayı elektrik motoruna veya diğer sistemlere bağlarken
+alternatif-doğru akım geçişleri veya sistem besleme gerilimi dönüştürmeleri için rektifiyer ve inverter gibi dönüşüm elemanları kullanılmaktadır. Parça özelinde her biri 
+önemli birer elektrik devre elemanı olsalar da üst sistem seviyesi performansı açısından bakıldığında sadece dönüşüm çarpanları ve kayıpları ifade eder. Bu sebeple bu çalışmada ilgili elemanlar modellenirken yüzeysel olarak sisteme dahil edilmiştir.
+
+\subsection{Batarya Türleri ve Ni-Mh Batarya}
+\label{nimhsection}
+
+Geçmişten günümüze farklı maddelerden oluşan bataryalar mevcuttur. Prensipte koşulları sağlayan tüm maddelerden batarya yapılabileceği gibi, en yaygın 
+batarya türlerine örnek olarak kurşun-asit, nikel, gümüş, alkali-manganez, çinko-karbon, civa ve lityum verilebilir. İsmi geçen element ve bileşiklerin oluşturduğu farklı ve kompleks diğer bileşikler
+bataryaların hücrelerini oluşturur. Tekli hücre yapıda batarya olabileceği gibi, genelde menzil ve kapasite ihtiyacından dolayı çoklu hücrelerin bir araya gelmesiyle oluşan batarya paketleri kullanılmaktadır.
+Telefon, taşınabilir şarj aleti, elektrikli araba vb. hem hafif hem de uygun kapasiteli batarya gerektiren sistemlerde yaygın olarak \acrfull{liion} veya \acrfull{nimh} batarya kullanılmaktadır (\cite{bataryaturunedir}).
+
+
+Bu çalışmada yer alan taşıtta da \acrshort{nimh} yer aldığı için bu batarya türü üzerinde durulmuştur. Fakat literatürde \acrshort{nimh} ve diğer batarya türleri ile ilgili pek çok kaynak bulunmaktadır.
+Ni-Mh bataryalar, 1899'dan beri kullanılmakta olan \acrfull{nicd} bataryaların yerini almıştır. Nikel-Metal-Hidrit bataryalar, adından da anlaşılacağı üzere, Ni-Cd bataryalar gibi pozitif elektrodunda nikel bazlı bileşik (NiOOH) kullanmaktadır.
+Negatif elektrodunda ise kadmiyum yerine hidrojen-tutucu farklı ve karmaşık alaşımlar kullanmaktadır. Enerji yoğunluğu olarak bazı türleri lityum-iyon batarya seviyesine çıkabilmektedir.
+Farklı batarya türlerinin, özgül enerji yoğunlukları ve yaşam döngüleri (bir bataryanın kaç kez şarj-deşarj edilebileceği) Çizelge \ref{tab:bataryaturleritablosu}'te paylaşılmıştır.
+
+\begin{table}[h]
+    \centering
+    \caption{Bazı Batarya Türleri ve Özellikleri (\cite{batturtabloref})}\label{tab:bataryaturleritablosu}
+    \begin{tabular}{|l|l|l|}
+    \hline
+    \textbf{Batarya Türü} & \textbf{Özgül Enerji Yoğunluğu (Wh/kg)}  & \textbf{Yaşam Döngüsü (\%80 Deşarj)}         \\ \hline
+    Kurşun-Asit           & 30-50                                    & 200-300                                      \\ \hline
+    NiCd                  & 45-80                                    & 100                                          \\ \hline
+    NiMh                  & 60-120                                   & 300-500                                      \\ \hline
+    Lityum-Kobalt         & 150-190                                  & 500-1000                                     \\ \hline
+    Lityum-Manganez       & 100-135                                  & 500-1000                                     \\ \hline
+    Lityum-Fosfat         & 90-120                                   & 1000-2000                                    \\ \hline
+    \end{tabular}
+\end{table}
+
+\subsection{Batarya Yönetimi ve Histerezis/Aç-Kapa Kontrol}
+\label{bmssection}
+Önceki kısımlarda da belirtildiği üzere batarya yönetimi yoğun çalışma gerektiren önemli bir konudur. Optimize edilmemiş sistemlerin menzili çok düşük olabilir. Hatta sistemdeki batarya devre elemanlarının çektiği gücü 
+beslemeye yetmeyebilir. Bu sebeple zaman içerisinde farklı batarya yönetimi yaklaşımları geliştirilmiştir. Batarya yönetiminden kastedilen aslında bir yaklaşım veya uzlaşımın genelleştirilmesi olsa da 
+motor veya taşıt kontrol sistemlerinde olduğu gibi batarya yönetim sistemi isminde elektronik sistemler oluşturulmuştur. Bu sistemler bataryanın performansını, sıcaklığını, bulunduğu çalışma konumunu, ihtiyaç duyulan ve sisteme beslenilecek güç vb. parametreleri 
+gözlemleyerek batarya (veya batarya paketinin) istenilen güvenli bölgede kalmasını sağlar.
+
+Bu çalışmada ise bataryanın sıcaklık gibi ortam faktörlerinin sabit ve güvenli bölgede tutulduğu varsayılarak, batarya modellemesi ve yönetimi performans bakış açısıyla yapılmıştır.
+Bataryanın herhangi bir andaki şarj seviyesini tam şarj kapasitesine oranladığımız zaman \acrfull{soc} değerini elde ederiz. Bu değer genel olarak yüzdesel ve \%0 batarya boş \%100 batarya dolu olacak şekilde ifade edilir. \ref{bataryasection}'te yapılan batarya ile yakıt deposu analojisini düşündüğümüzde SoC değerini de yakıt seviye göstergesi olarak düşünebiliriz. SoC değerinin belirlenmesi batarya içeren sistemlerde büyük önem taşır. SoC optimizasyonu sayesinde bataryayı 
+derin deşarj ve aşırı şarj etme durumlarından kurtarabiliriz. Bataryaların çalışma prensiplerinden dolayı şarj-deşarj durumlarında tüm SoC bölgelerinde aynı şekilde davranmazlar. Batarya yönetimi sistemleri sayesinde bu farklı bölgelerdeki verimleri de optimize edebiliriz.
+Gerçek hayatta bir taşıtın SoC değerini doğrudan hesaplayamayız. Fakat yapılan çalışmalar sayesinde geliştirilmiş metotlar ile doğrudan olmayan yöntemlerle SoC değerini tespit edebiliriz. Bu yöntemlere örnek olarak, kimyasal yaklaşım, voltaj tabanlı hesaplama, zamana bağlı akım integrali, Kalman filtrelemesi ve basınç yöntemleri örnek olarak verilebilir (\cite{socdegerinibulma}). 
+Modelleme kısmında ise başlangıç adımı için bir değer,\acrfull{soci}, belirlenmiş, sürüş çevrimlerindeki zamana bağlı çözümler de bu değerden yola çıkarak hesaplanmıştır. Yapılan 
+basitleştirmeler ve kabuller doğrultusunda modellemenin gerçek ortam testlerine olan avantajı sayesinde doğrudan SoC değeri bulunabilmektedir.
+
+SoC değerinin belirli bir değerin üstünde tutulması bataryanın aşırı ısınmasına ve aşırı beslenmesine sebep olabilir. Aynı şekilde SoC değerinin belirli bir değerin altında olması da derin deşarj karakteristiğinden dolayı batarya ömrünü kısaltmaktadır.
+Bu SoC çalışma bölgesi durumu, batarya yönetim sisteminin üstesinden gelmesi gereken bir problemdir ve mevcut sistemler bu soruna cevap verecek şekilde tasarlanmaktadır. Bu yüzden de batarya yönetim sistemi kontrol algoritmasının modellenmesi de hibrit motor kontrol sistemlerinde 
+büyük bir pay taşımaktadır. Farklı ihtiyaçlara göre farklı yaklaşımlar mevcuttur. Bu tezde ise histerezis veya diğer adıyla aç-kapa kontrol modeli yaklaşımına gidilmiştir. Aç-Kapa kontrol, batarya yönetim sistemlerinde kullanılan yaygın, kuvvetli ve pratik bir yaklaşımdır (\cite{soconoffref}). 
+Sistemdeki bataryanın SoC değerinin çalışma bölgesi bir en yüksek bir de en düşük değer tarafından sınırlandırılır. Bu sınırlar kullanılan batarya türü, motor türü ve ihtiyaca göre değişebilse de genelde üst limit olarak 70-90, alt limit olarak 40-60 değerleri kullanılabilmektedir.
+Bu yaklaşım adından da anlaşıldığı gibi histerezis temelli bir yaklaşımdır. Bataryanın şarjının azalmasına alt sınıra gelene kadar izin verilir. Daha sonra sistem yapılan hesaplar aracılığıyla uygun şarj modelini belirler ve bataryayı şarj etmeye başlar. SoC değeri üst limite geldiğinde ise şarj olma durumu bırakılır ve batarya o anki optimum modda sistemi beslemeye başlar.
+Çalışma boyunca bu bataryanın şarj-deşarj döngüsü tekrarlanır ve şarj modu sürekli açıp kapanır. Bu sebeple de bu yaklaşım aç-kapa kontrol adını almıştır. Bu kontrol türünün modellenmesi, \ref{gucvesurusmodutahkimi}, \ref{bataryaguctuketimhesabikismi} ve \ref{sarjdurumuhesabikismi} kısımlarında; rastgele limit değerlerle elde edilmiş, aç-kapa kontrol ile kontrol edilen zamana bağlı SoC değerlerini içeren görsel ise Şekil \ref{fig:onoffgorsel}'te görülebilir.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{gorseller/onoffgorsel.png}
+    \caption{Zamana Bağlı Aç-Kapa Kontrolcülü SoC eğrisi}\label{fig:onoffgorsel}
+\end{figure}
